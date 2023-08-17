@@ -4,8 +4,6 @@ FROM mysql:8.0
 # Copy your custom MySQL configuration file to the container
 COPY my.cnf /etc/mysql/my.cnf
 
-# Create a directory for the data dump
-RUN mkdir /docker-entrypoint-initdb.d/data_dump
 
 # Copy your data dump SQL file to the container
 # COPY data_dump.sql /docker-entrypoint-initdb.d/data_dump/data_dump.sql
