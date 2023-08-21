@@ -11,11 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: build and deploy
-        uses: mr-smithers-excellent/docker-build-push@v6
+      - name: install the gcloud cli
+        uses: google-github-actions/setup-gcloud@v0
         with:
-          image: pdngayan1/planning-mysql
-          tags: v1
-          registry: docker.io
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+         project_id: ncinga-reseller-incubator
+         service_account_key: ${{ secrets.GOOGLE_CREDENTIALS }}
+         export_default_credentials: true  
+      - name: build and push the docker image
+        env:
+          GOOGLE_PROJECT: ncinga-reseller-incubator
+        run: |
+          gcloud auth configure-docker asia-south1-docker.pkg.dev
+          docker build -t asia-south1-docker.pkg.dev/ncinga-reseller-incubator/docker-image/planning-tool-mysql:latest .
+          docker push asia-south1-docker.pkg.dev/ncinga-reseller-incubator/docker-image/planning-tool-mysql:latest 
