@@ -14,7 +14,7 @@ spec:
         app: mysql
     spec:
       containers:
-        - image: pdngayan1/planning-mysql:v1
+        - image: asia-south1-docker.pkg.dev/ncinga-reseller-incubator/docker-image/planning-tool-mysql:latest
           name: mysql
           env:
             - name: MYSQL_ROOT_PASSWORD
@@ -33,4 +33,4 @@ spec:
       volumes:
         - name: mysql-persistent-storage
           persistentVolumeClaim:
-            claimName: mysql-pv-claim
+            claimName: mysql-pv-clai    
