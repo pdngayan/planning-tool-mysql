@@ -6,6 +6,7 @@ metadata:
     app: planning-mysql-service
     service: planning-mysql-service
 spec:
+  type: LoadBalancer
   ports:
    - name: http
      protocol : TCP
